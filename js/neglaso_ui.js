@@ -1,5 +1,7 @@
 $( document ).ready(function(){
-	$(function() {
+	
+	//Genera la taula de 10x10.
+	$.fn.generarTaulell = function() {
 		var taula = $('<table class="table"></table>');
 		var col, row, numerico;
 		
@@ -17,7 +19,10 @@ $( document ).ready(function(){
 				$('#r'+numerico).append(col);
 			}
 		}
-		
-		$().generarRandom();
-	});
+	};
+
+	
+	
+	
+	
 });
