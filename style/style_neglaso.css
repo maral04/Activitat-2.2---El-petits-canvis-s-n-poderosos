@@ -1,19 +1,36 @@
-/*
 .container{
-	
+	padding-top:5%;
 }
 
 table{
 	border:1px solid black;
-	border-collapse:collapse;
 	margin:0 auto;
 }
 
 td{
-	width:35px;
-	height:35px;
+	width:55px;
+	height:55px;
 	border:1px solid black;
-	border-collapse:collapse;
 	text-align:center;
 	font-weight:bold;
-}*/
+}
+
+.verd{
+	background-color:rgb(240,240,240);
+	
+	/*border:3px solid rgb(15,255,0);*/
+	background-image: url(../img/catmlavat.png);
+	background-size:45px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+.blau{
+	background-color:rgb(240,240,240);
+	
+	/*border:3px solid blue;*/
+	background-image: url(../img/eagle.png);
+	background-size:45px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
