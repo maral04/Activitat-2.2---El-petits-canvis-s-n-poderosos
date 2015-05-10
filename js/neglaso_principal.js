@@ -11,6 +11,8 @@ var contigua = 0;
 var veines = 3;
 var checkId;
 var contZ = 1;
+var beingDragged;
+var saveId;
 
 $( document ).ready(function(){
 	
@@ -130,19 +132,5 @@ $( document ).ready(function(){
 				}
 			}
 		}
-	};
-	
-	$.fn.allowDrop = function(ev) {
-		ev.preventDefault();
-	};
-
-	$.fn.drag = function(ev) {
-		ev.dataTransfer.setData("text", ev.target.id);
-	};
-
-	$.fn.drop = function(ev) {
-		$().preventDefault(ev);
-		var data = ev.dataTransfer.getData("text");
-		$().target.appendChild(document.getElementById(data));
 	};
 });

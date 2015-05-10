@@ -71,19 +71,69 @@ $( document ).ready(function(){
 					
 				}
 			}else{
-				$('#c'+fitxes[i].id).droppable({
-					drop: function() {
-					//$( this )
-					$( this ).droppable( "option", "tolerance", "fit" );
-						//.css();
-						console.log('Dropped');
-						//Deshabilita el droppable un cop s'ha dropped.
-						$( this ).droppable( "option", "disabled", true );
-					}
-				});
-				
+				$().afegirDroppable(fitxes[i].id);
+
 			}
 		}
 	};
+	
+	$.fn.afegirDroppable = function(idInterna) {
 		
+		$('#c'+idInterna).droppable({
+			drop: function(e, ui) {
+				var off = $( this ).offset();
+				
+				
+				saveId = $( this ).attr('id');
+				//console.log(this);
+				
+				//console.log(saveId);
+				$( this ).replaceWith(beingDragged);
+				
+				//console.log(this);
+				
+				//Suda de mi completament:
+				$( this ).attr('id',saveId);
+				//$( this ).attr('id','c'+fitxes[saveId.substring(1)].id);
+				
+				//Ho mostra bé a la consola, pero no a l'html!
+				console.log("ID! "+$(this).attr('id'));
+				
+				//console.log('Dropped');
+				//Deshabilita el droppable un cop s'ha dropped.
+				//$( this ).droppable( "option", "disabled", true );
+				
+				//Per evitar l'offset del maleït ui!!!!
+				ui.draggable.offset( off );
+				
+				//Al fer el canvi entre tds, també afecta als objectes, 
+				//aquest canvien les propietats.
+				var intercanviHappy, intercanviId, intercanviColor;
+				
+				intercanviHappy = fitxes[checkId].imHappy;
+				//intercanviId = fitxes[checkId].id;
+				intercanviColor = fitxes[checkId].color;
+				
+				fitxes[checkId].imHappy = fitxes[saveId.substring(1)].imHappy;
+				//fitxes[checkId].id = fitxes[saveId.substring(1)].id;
+				fitxes[checkId].color = fitxes[saveId.substring(1)].color;
+				
+				fitxes[saveId.substring(1)].imHappy = intercanviHappy;
+				//fitxes[saveId.substring(1)].id = intercanviId;
+				fitxes[saveId.substring(1)].color = intercanviColor;				
+				
+				console.log(checkId 
+				+" | "+ fitxes[checkId].imHappy
+				+" "+ fitxes[checkId].id
+				+" "+ fitxes[checkId].color
+				);
+				
+				console.log(saveId.substring(1) 
+				+" | "+ fitxes[saveId.substring(1)].imHappy
+				+" "+ fitxes[saveId.substring(1)].id
+				+" "+ fitxes[saveId.substring(1)].color
+				);
+			}
+		});
+	};
 });
