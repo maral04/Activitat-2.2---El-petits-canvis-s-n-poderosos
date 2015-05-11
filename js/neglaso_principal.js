@@ -14,6 +14,7 @@ var contZ = 1;
 var beingDragged;
 var saveId;
 var potsDrop = false;
+var draggedClass;
 
 $( document ).ready(function(){
 	

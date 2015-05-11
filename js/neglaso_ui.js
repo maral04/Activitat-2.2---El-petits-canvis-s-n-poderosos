@@ -63,19 +63,18 @@ $( document ).ready(function(){
 
 				}else{
 					$('#c'+fitxes[i].id).css("cursor","move");
-					$('#c'+fitxes[i].id).draggable({
+					$('#c'+fitxes[i].id).draggable();/*{
 						drop: function(e, ui) {
-							
+							//console.log('asdasdasdasd');
 							
 						}
-					});
+					});*/
 					//console.log(i+' imNotHappy :(');
 					//$('#c'+fitxes[i].id).attr("draggable", "True");
 
 				}
 			}else{
 				$().afegirDroppable(fitxes[i].id);
-
 			}
 		}
 	};
@@ -87,13 +86,15 @@ $( document ).ready(function(){
 				//if(potsDrop == true){
 					var off = $( this ).offset();
 					
-					
 					saveId = $( this ).attr('id');
 					//console.log(this);
 					
 					//console.log(saveId);
-					$( this ).replaceWith(beingDragged);
-					//$( this ).replaceWith('<td id="c'+saveId+'" class="cols asd"></td>');
+					//$( this ).replaceWith(beingDragged);
+					
+					//console.log(draggedClass);
+					$( this ).replaceWith('<td id="'+saveId+'" class="cols '+draggedClass+'" style="cursor: move;"></td>');
+					$( '#'+saveId ).draggable( 'disable' ); //Provoca missatge d'error, però funciona...
 					//$( this ).replaceWith($('#c'+checkId));
 					
 					//console.log(this);
@@ -101,13 +102,16 @@ $( document ).ready(function(){
 					//Suda de mi completament:
 					//$('#'+saveId).attr('id',saveId);
 					//$( this ).attr('id','c'+fitxes[saveId.substring(1)].id);
+					//$( this ).attr('id','c222');
 					
 					//Ho mostra bé a la consola, pero no a l'html!
 					console.log("ID! "+$(this).attr('id'));
 					
 					//console.log('Dropped');
 					//Deshabilita el droppable un cop s'ha dropped.
-					//$( this ).droppable( "option", "disabled", true );
+					//$( this ).droppable( 'disable' );
+					
+					//console.log($('#c0').attr('class'));
 					
 					//Per evitar l'offset del maleït ui!!!!
 					ui.draggable.offset( off );
@@ -120,7 +124,7 @@ $( document ).ready(function(){
 					
 					//Al fer el canvi entre tds, també afecta als objectes, 
 					//aquest canvien les propietats.
-					var intercanviHappy, intercanviId, intercanviColor;
+					var intercanviHappy, /*intercanviId,*/ intercanviColor;
 					/*
 					console.log("Abans:");
 					console.log(checkId 
@@ -147,6 +151,9 @@ $( document ).ready(function(){
 					//fitxes[saveId.substring(1)].id = intercanviId;
 					fitxes[saveId.substring(1)].color = intercanviColor;				
 					
+					//$( this ).attr('id','c'+fitxes[saveId.substring(1)].id);
+					//$('#'+saveId).attr('id','c'+fitxes[saveId.substring(1)].id);
+					
 					console.log("Després:");
 					console.log(checkId 
 					+" | "+ fitxes[checkId].imHappy
@@ -160,7 +167,7 @@ $( document ).ready(function(){
 					+" "+ fitxes[saveId.substring(1)].color
 					);
 					
-					$().checkHappy($(this).attr('id'));
+					
 				//}
 			}
 		});
