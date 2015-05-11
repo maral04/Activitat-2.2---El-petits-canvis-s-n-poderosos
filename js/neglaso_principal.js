@@ -13,6 +13,7 @@ var checkId;
 var contZ = 1;
 var beingDragged;
 var saveId;
+var potsDrop = false;
 
 $( document ).ready(function(){
 	
@@ -45,9 +46,12 @@ $( document ).ready(function(){
 	};
 	
 	//Checkeja si son happy.
-	$.fn.checkHappy = function() {
+	$.fn.checkHappy = function(segon) {
+		if(segon == null){
+			segon = fitxes.length;
+		}
 		//(imHappy, id, color)
-		for(var i = 0; i < fitxes.length;i++){
+		for(var i = 0; i < segon;i++){
 			//var contVerd = 0;
 			//var contBlau = 0;
 			contigua = 0;

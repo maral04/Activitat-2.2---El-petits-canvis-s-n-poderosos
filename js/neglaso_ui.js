@@ -60,15 +60,18 @@ $( document ).ready(function(){
 					//console.log(i+' imHappy :)');
 					$('#c'+fitxes[i].id).css("background-color","rgb(55,255,245)");
 					//$('#c'+fitxes[i].id).attr("draggable", "False");
-					
-					
+
 				}else{
 					$('#c'+fitxes[i].id).css("cursor","move");
-					$('#c'+fitxes[i].id).draggable();
+					$('#c'+fitxes[i].id).draggable({
+						drop: function(e, ui) {
+							
+							
+						}
+					});
 					//console.log(i+' imNotHappy :(');
 					//$('#c'+fitxes[i].id).attr("draggable", "True");
-					
-					
+
 				}
 			}else{
 				$().afegirDroppable(fitxes[i].id);
@@ -81,58 +84,84 @@ $( document ).ready(function(){
 		
 		$('#c'+idInterna).droppable({
 			drop: function(e, ui) {
-				var off = $( this ).offset();
-				
-				
-				saveId = $( this ).attr('id');
-				//console.log(this);
-				
-				//console.log(saveId);
-				$( this ).replaceWith(beingDragged);
-				
-				//console.log(this);
-				
-				//Suda de mi completament:
-				$( this ).attr('id',saveId);
-				//$( this ).attr('id','c'+fitxes[saveId.substring(1)].id);
-				
-				//Ho mostra bé a la consola, pero no a l'html!
-				console.log("ID! "+$(this).attr('id'));
-				
-				//console.log('Dropped');
-				//Deshabilita el droppable un cop s'ha dropped.
-				//$( this ).droppable( "option", "disabled", true );
-				
-				//Per evitar l'offset del maleït ui!!!!
-				ui.draggable.offset( off );
-				
-				//Al fer el canvi entre tds, també afecta als objectes, 
-				//aquest canvien les propietats.
-				var intercanviHappy, intercanviId, intercanviColor;
-				
-				intercanviHappy = fitxes[checkId].imHappy;
-				//intercanviId = fitxes[checkId].id;
-				intercanviColor = fitxes[checkId].color;
-				
-				fitxes[checkId].imHappy = fitxes[saveId.substring(1)].imHappy;
-				//fitxes[checkId].id = fitxes[saveId.substring(1)].id;
-				fitxes[checkId].color = fitxes[saveId.substring(1)].color;
-				
-				fitxes[saveId.substring(1)].imHappy = intercanviHappy;
-				//fitxes[saveId.substring(1)].id = intercanviId;
-				fitxes[saveId.substring(1)].color = intercanviColor;				
-				
-				console.log(checkId 
-				+" | "+ fitxes[checkId].imHappy
-				+" "+ fitxes[checkId].id
-				+" "+ fitxes[checkId].color
-				);
-				
-				console.log(saveId.substring(1) 
-				+" | "+ fitxes[saveId.substring(1)].imHappy
-				+" "+ fitxes[saveId.substring(1)].id
-				+" "+ fitxes[saveId.substring(1)].color
-				);
+				//if(potsDrop == true){
+					var off = $( this ).offset();
+					
+					
+					saveId = $( this ).attr('id');
+					//console.log(this);
+					
+					//console.log(saveId);
+					$( this ).replaceWith(beingDragged);
+					//$( this ).replaceWith('<td id="c'+saveId+'" class="cols asd"></td>');
+					//$( this ).replaceWith($('#c'+checkId));
+					
+					//console.log(this);
+					
+					//Suda de mi completament:
+					//$('#'+saveId).attr('id',saveId);
+					//$( this ).attr('id','c'+fitxes[saveId.substring(1)].id);
+					
+					//Ho mostra bé a la consola, pero no a l'html!
+					console.log("ID! "+$(this).attr('id'));
+					
+					//console.log('Dropped');
+					//Deshabilita el droppable un cop s'ha dropped.
+					//$( this ).droppable( "option", "disabled", true );
+					
+					//Per evitar l'offset del maleït ui!!!!
+					ui.draggable.offset( off );
+					
+					//Nofunciona.
+					//$( this ).css('cursor','not-allowed');
+					//$('#'+saveId).css('cursor','not-allowed');
+					
+					//$('#'+saveId).attr('id',saveId);
+					
+					//Al fer el canvi entre tds, també afecta als objectes, 
+					//aquest canvien les propietats.
+					var intercanviHappy, intercanviId, intercanviColor;
+					/*
+					console.log("Abans:");
+					console.log(checkId 
+					+" | "+ fitxes[checkId].imHappy
+					+" "+ fitxes[checkId].id
+					+" "+ fitxes[checkId].color
+					);
+					
+					console.log(saveId.substring(1) 
+					+" | "+ fitxes[saveId.substring(1)].imHappy
+					+" "+ fitxes[saveId.substring(1)].id
+					+" "+ fitxes[saveId.substring(1)].color
+					);
+					*/
+					intercanviHappy = fitxes[checkId].imHappy;
+					//intercanviId = fitxes[checkId].id;
+					intercanviColor = fitxes[checkId].color;
+					
+					fitxes[checkId].imHappy = fitxes[saveId.substring(1)].imHappy;
+					//fitxes[checkId].id = fitxes[saveId.substring(1)].id;
+					fitxes[checkId].color = fitxes[saveId.substring(1)].color;
+					
+					fitxes[saveId.substring(1)].imHappy = intercanviHappy;
+					//fitxes[saveId.substring(1)].id = intercanviId;
+					fitxes[saveId.substring(1)].color = intercanviColor;				
+					
+					console.log("Després:");
+					console.log(checkId 
+					+" | "+ fitxes[checkId].imHappy
+					+" "+ fitxes[checkId].id
+					+" "+ fitxes[checkId].color
+					);
+					
+					console.log(saveId.substring(1) 
+					+" | "+ fitxes[saveId.substring(1)].imHappy
+					+" "+ fitxes[saveId.substring(1)].id
+					+" "+ fitxes[saveId.substring(1)].color
+					);
+					
+					$().checkHappy($(this).attr('id'));
+				//}
 			}
 		});
 	};
