@@ -8,6 +8,7 @@ $( document ).ready(function(){
 	$().generarRandom();
 	
 	$("#botostart").click(function() {
+		alert('No està acabat, hi ha agut un munt de problemes amb el drop... id erronia etc.');
 		$().omplirFitxes();
 		$().checkHappy();
 		//Deshabilitar
